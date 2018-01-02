@@ -1,4 +1,3 @@
-
 /*Given two binary strings, return their sum (also a binary string).
 
 For example,
@@ -7,6 +6,15 @@ b = "1"
 Return "100".
 
 Version 1: 12/31/2017*/
+
+/*1: The original thought is: 
+When I design the loop, if I gave the situation where as long as one is over, I quit the loop. So the sum of inner loop don't have
+have to consider the case of null pointer exception. Later on, consider the extra case. Weak point is: the program would 
+be tedious.
+
+The improvment: I can consider two cases at the same in the loop stop condition, but within the loop, I have to consider 
+the case where we have to pay attention to the null exception. Finally you have to consider the situation when finish
+the loop. */
 
     public String addBinary(String a, String b) {
         char[] aChar = a.toCharArray();
