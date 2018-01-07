@@ -68,3 +68,48 @@ version1: 01/06/2018
         }
         return res;
     }
+
+/*version2: 
+01/07/2018
+(1) when removing duplicate, you should consider the whole process instead of just one point.
+(2) The duplicate point can be calculated by comparing with the duplicate*/
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums.length == 0) {
+            return res;
+        }
+        Arrays.sort(nums);
+        int i = 0;
+        while (i < nums.length-2) {
+            int j = i + 1, k = nums.length - 1;
+            while (j < nums.length && k >= 0 && j < k) {
+                if (nums[j] + nums[k] == -nums[i]) {
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(nums[i]);
+                    temp.add(nums[j]);
+                    temp.add(nums[k]);
+                    res.add(temp);
+                    //Arrays.asList(num[i], num[lo], num[hi])
+                    //int a = nums[j];
+                    //int b = nums[k];
+                    j++;
+                    k--;
+                    while (j < nums.length && nums[j] == nums[j-1]) {j++;}
+                    while (k >= 0 && nums[k] == nums[k+1]) {k--;}
+                }
+                else if (nums[j] + nums[k] < -nums[i]) {
+                    //This part could also improve the performance by adding duplicate nums.
+                    j++;
+                }
+                else {
+                    //The same way to improve the performance.
+                    k--;
+                }
+            }
+            //int c = nums[i];
+            i++;
+            while (i< nums.length && nums[i] == nums[i-1]) {i++;}
+        }
+        return res;
+    }
